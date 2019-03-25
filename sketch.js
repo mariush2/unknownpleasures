@@ -6,7 +6,7 @@ function setup() {
 	lineamount = floor(windowHeight / lineSpacing);
 	offsetWidth = floor(windowWidth / 3) * 2;
 	offsetHeight = floor(windowHeight / 6) * 2;
-	frameRate(1);
+	frameRate(0.5);
 }
 
 function draw() {
@@ -24,10 +24,10 @@ function Line(y) {
 	for (let x = 0; x < windowWidth - offsetWidth; x++) {
 		let n;		
 		if (x >= (windowWidth - offsetWidth) / 3 && x <= (windowWidth - offsetWidth) - (windowWidth - offsetWidth) / 3) {
-			if (x >= (windowWidth - offsetWidth / 2)) {
-				n = random(-0.5, sin((x / 13) + random(1, 10))*3) - 0.22;	
+			if (x >= (windowWidth - offsetWidth) / 2) {
+				n = random(-0.5, sin((x / 16) + random(1, 10))*3) + 0.22;
 			} else {
- 				n = random(-sin((x / 13) + random(1, 10))*3, 0.5) - 0.22;	
+ 				n = random(-sin((x / 16) + random(1, 10))*3, 0.5) - 0.22;	
 			}
 										
 		} else {
