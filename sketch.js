@@ -4,22 +4,26 @@ let lineSpacing = 15;
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	lineamount = floor(windowHeight / lineSpacing);
-	offsetWidth = floor(windowWidth / 3);
-	offsetHeight = floor(windowHeight / 6);
-	console.log(windowHeight);
+	offsetWidth = floor(windowWidth / 3) * 2;
+	offsetHeight = floor(windowHeight / 6) * 2;
+	frameRate(1);
 }
 
 function draw() {
 	background(10);		
-	translate(offsetWidth, offsetHeight);		 
-	for(let i = 0; i * lineSpacing < windowHeight - offsetHeight * 2; i++) {
+	translate(offsetWidth / 2, offsetHeight / 2);		 
+	for(let i = 0; i * lineSpacing < windowHeight - offsetHeight; i++) {
 		Line(i * lineSpacing);
 	}
 }
 
 function Line(y) {
-	// Use bezier
-	// bezier(firstx, firsty, controlpointx, controlpointy, secondx, secondy)
 	stroke(255);
-  bezier(0, y, 0, y, windowWidth - offsetWidth * 2, y, windowWidth  - offsetWidth * 2, y); 
+	// Create points along the line we are on now, with noise
+	let prev = y;
+	for (let x = 0; x < windowWidth - offsetWidth; x++) {
+		let n = random(-0.5, 0.5);		
+		point(x, prev + n);
+		prev = prev + n
+	}
 }
