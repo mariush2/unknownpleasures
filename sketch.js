@@ -10,7 +10,7 @@ function setup() {
 }
 
 function draw() {
-	background(10);		
+	background(15);		
 	translate(offsetWidth / 2, offsetHeight / 2);		 
 	for(let i = 0; i * lineSpacing < windowHeight - offsetHeight; i++) {
 		Line(i * lineSpacing);
@@ -20,9 +20,19 @@ function draw() {
 function Line(y) {
 	stroke(255);
 	// Create points along the line we are on now, with noise
-	let prev = y;
+				let prev = y;
 	for (let x = 0; x < windowWidth - offsetWidth; x++) {
-		let n = random(-0.5, 0.5);		
+		let n;		
+		if (x >= (windowWidth - offsetWidth) / 3 && x <= (windowWidth - offsetWidth) - (windowWidth - offsetWidth) / 3) {
+			if (x >= (windowWidth - offsetWidth / 2)) {
+				n = random(-sin(x / 10)*2, sin(x / 10)*3) + 0.22;	
+			} else {
+ 				n = random(-sin(x / 10)*3, sin(x / 10)*2) - 0.22;	
+			}
+										
+		} else {
+			n = random(-0.5, 0.5);
+		}
 		point(x, prev + n);
 		prev = prev + n
 	}
