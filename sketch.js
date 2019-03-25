@@ -25,9 +25,9 @@ function Line(y) {
 		let n;		
 		if (x >= (windowWidth - offsetWidth) / 3 && x <= (windowWidth - offsetWidth) - (windowWidth - offsetWidth) / 3) {
 			if (x >= (windowWidth - offsetWidth / 2)) {
-				n = random(-sin(x / 10)*2, sin(x / 10)*3) + 0.22;	
+				n = random(-0.5, sin((x / 13) + random(1, 10))*3) - 0.22;	
 			} else {
- 				n = random(-sin(x / 10)*3, sin(x / 10)*2) - 0.22;	
+ 				n = random(-sin((x / 13) + random(1, 10))*3, 0.5) - 0.22;	
 			}
 										
 		} else {
