@@ -21,19 +21,37 @@ function Line(y) {
 	stroke(255);
 	// Create points along the line we are on now, with noise
 	let prev = y;
-	let p = random(3, 4.5);
-	let a = 20;
+	let amountofpeaks = 1;
+	let reachedTop = false;
+	let reachedBot = false
+	let incline = -0.5;
+	let top = y - 50;
 	for (let x = 0; x < windowWidth - offsetWidth; x++) {
 		let n;		
 		if (x >= (windowWidth - offsetWidth) / 3 && x <= (windowWidth - offsetWidth) - (windowWidth - offsetWidth) / 3) {
-			let newx = map(x, (windowWidth - offsetWidth) / 3, (windowWidth - offsetWidth) - (windowWidth - offsetWidth) / 3, 0, PI * 2);
-			n =  ((2 * a) / PI) * asin(sin(((2 * PI) / p) * newx));
-			n += random(-0.5, 0.5);
-			point(x, prev + n);
+			if (!reachedTop) {
+				// Climb till we reach the next peak
+				n = incline;
+				if (prev <= top) {
+					reachedTop = true;
+				}
+			} else if (!reachedBot) {
+				n = -incline
+				if (prev <= y) {
+					reachedBot = true;
+				}		
+			} else {
+				if (amountofpeaks > 0) {
+					amountofpeaks -= 1;
+					reachedTop = false;
+					reachedBot = false;
+				}
+				n = random(-0.5, 0.5);
+			}
 		} else {
 			n = random(-0.5, 0.5);
-			point(x, prev + n);
-			prev = prev + n
 		}
+		point(x, prev + n);
+		prev = prev + n
 	}
 }
